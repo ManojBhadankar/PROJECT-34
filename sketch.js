@@ -1,118 +1,73 @@
-
 const Engine = Matter.Engine;
-const World= Matter.World;
+const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Constraint = Matter.Constraint;
-var engine, world;
 
+var engine, world;
+var box1, box2, box3,box4;
+var hero,monster,rope,ground;
+
+function preload() {
+  bg = loadImage("gamingbackground2.png");
+}
 
 function setup() {
-  createCanvas(800,400);
-  
-  engine=Engine.create();
-  world=engine.world;
-  
-  fill("black")
-  var polygon_options={
-    restitution:0.8
-  }
-  polygon = Bodies.circle(100,50,20,polygon_options);
-  World.add(world,polygon);
+  createCanvas(3000, 700);
+  engine = Engine.create();
+  world = engine.world;
 
-  chain=new slingshot(polygon.body,{x:100,y:50})
-  
-  stand1 = new Ground(590,300,270,20);
-  stand2 = new Ground(700,200,200,20)
-  // create blocks I
-  block1 = new Box(640,175,30,40);
-  block2 = new Box(670,175,30,40);
-  block3 = new Box(700,175,30,40);
-  block4 = new Box(730,175,30,40);
-  block5 = new Box(760,175,30,40);
+  ground = new Ground(600, 600, 1200, 20);
 
-  block7 = new Box(670,135,30,40);
-  block8 = new Box(700,135,30,40);
-  block9 = new Box(730,135,30,40);
+  hero = new Hero(400,800,250);
+  hero.scale=2;
+  rope = new Rope(hero.body, { x: 500, y: 50 });
+  monster = new Monster(1100,550,300);
 
-  block10 = new Box(700,90,30,40);
-
-  // create block II
-
-  block11 = new Box(490,275,30,40);
-  block12 = new Box(530,275,30,40);
-  block13 = new Box(570,275,30,40);
-  block14 = new Box(610,275,30,40);
-  block15 = new Box(650,275,30,40);
-  block16 = new Box(690,275,30,40);
-  block17 = new Box(730,275,30,40);
-
-  block18 = new Box(530,235,30,40);
-  block19 = new Box(570,235,30,40);
-  block20 = new Box(610,235,30,40);
-  block12 = new Box(650,235,30,40);
-  block22 = new Box(730,235,30,40);
-
-  block23 = new Box(570,195,30,40);
-  block24 = new Box(610,195,30,40);
-  block25 = new Box(650,195,30,40);
-  
+  box1 = new Box(600, 100, 70, 70);
+  box2 = new Box(900, 100, 70, 70);
+  box3 = new Box(900, 100, 70, 70);
+  box4 = new Box(900, 100, 70, 70);
+  box5 = new Box(600, 170, 70, 70);
+  box6 = new Box(600, 240, 70, 70);
+  box7 = new Box(700, 170, 70, 70);
+  box8 = new Box(700, 240, 70, 70);
+  box9 = new Box(900, 240, 70, 70);
+  box10 = new Box(900, 240, 70, 70);
+  box11 = new Box(800, 240, 70, 70);
+  box12 = new Box(800, 240, 70, 70);
+  box13 = new Box(800, 240, 70, 70);
+  box14 = new Box(800, 240, 70, 70);
+  box15 = new Box(800, 240, 70, 70);
+  box16 = new Box(800, 240, 70, 70);
 }
 
 function draw() {
-  imageMode(CENTER)
-  
-  background(255,255,255);  
+  background(bg);
+  Engine.update(engine);
+  ground.display();
+  box1.display();
+  box2.display();
+  box3.display();
+  box4.display();
+  box5.display();
+  box6.display();
+  box7.display();
+  box8.display();
+  box9.display();
+  box10.display();
+  box11.display();
+  box12.display();
+  box13.display();
+  box14.display();
+  box15.display();
+  box16.display();
 
-  stand1.display();
-  stand2.display();
-
-  fill("orange")
-  block1.display();
-  block2.display();
-  block3.display();
-  block4.display(); 
-  block5.display();
-
- fill("orange")
-  block7.display();
-  block8.display();
-  block9.display();
-  block10.display();
-
-  // create block II
-
-  fill("orange")
-  block11.display(); 
-  block12.display(); 
-  block13.display(); 
-  block14.display();
-  block15.display();
-  block16.display();
-  block17.display(); 
-
-  fill("orange")
-  block18.display();
-  block19.display(); 
-  block20.display(); 
-  block12.display(); 
-  block22.display(); 
-
-  fill("orange")
-  block23.display(); 
-  block24.display(); 
-  block25.display(); 
-
-  chain.display();
-  
-  ellipseMode(CENTER);
-  ellipse(polygon.position.x,polygon.position.y,20,20)
-
-  drawSprites();
-}
-function mouseDragged() {
-Matter.Body.setPosition(polygon.body,{x:mouseX,y:mouseY})
+  hero.display();
+  rope.display();
+  monster.display();
 
 }
-function mouseReleased(){
-chain.fly();
-};
+
+ function mouseDragged(){
+   Matter.Body.setPosition(hero.body,{x:mouseX , y:mouseY});
+ }

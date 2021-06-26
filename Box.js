@@ -2,14 +2,12 @@ class Box {
   constructor(x, y, width, height) {
     var options = {
         'restitution':0.8,
-        'friction':0.3,
-        'density':1.0
+        'friction':1.0,
+        'density':20,
     }
     this.body = Bodies.rectangle(x, y, width, height, options);
     this.width = width;
     this.height = height;
-
-    
     
     World.add(world, this.body);
   }
@@ -20,8 +18,10 @@ class Box {
     translate(pos.x, pos.y);
     rotate(angle);
     rectMode(CENTER);
-    fill("orange");
+    strokeWeight(4);
+    stroke("black");
+    fill("red");
     rect(0, 0, this.width, this.height);
     pop();
   }
-};
+}
